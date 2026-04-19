@@ -1299,6 +1299,35 @@
     // EmailJS Başlatma
     emailjs.init('7au8gKc0L6IF8UF2I');
 
+    // TEST FONKSİYONU - SAYFAYI YÜKLEDIĞINDE OTOMATİK ÇALIŞACAK
+    function testEmailJS() {
+        console.log('🧪 TEST BAŞLADI');
+        console.log('Public Key:', '7au8gKc0L6IF8UF2I');
+        console.log('Service ID:', 'service_kzke8z7');
+        console.log('Template ID:', 'template_fze6yar');
+        
+        const testParams = {
+            name: 'TEST KULLANICI',
+            email: 'test@example.com',
+            message: 'BU BİR TEST MESAJIDIR'
+        };
+        
+        console.log('📤 Gönderiliyor:', testParams);
+        
+        emailjs.send('service_kzke8z7', 'template_fze6yar', testParams)
+            .then(function(response) {
+                console.log('✅ TEST BAŞARILI!');
+                console.log('Status:', response.status);
+                console.log('Text:', response.text);
+                alert('✅ TEST BAŞARILI!\n\nStatus: ' + response.status + '\n\nTemplate çalışıyor!');
+            }, function(error) {
+                console.log('❌ TEST HATASI!');
+                console.log('Error Status:', error.status);
+                console.log('Error Text:', error.text);
+                alert('❌ TEST HATASI!\n\nStatus: ' + error.status + '\n\nMessage: ' + error.text);
+            });
+    }
+
     // TEMA SEÇİCİ
     const lightBtn = document.getElementById('lightBtn');
     const darkBtn = document.getElementById('darkBtn');
@@ -1425,7 +1454,13 @@
 
     // SAYFA YÜKLEMEDE TEMA AYARLA
     loadDarkMode();
+
+    // SAYFA YÜKLENDİKTEN SONRA TEST ÇALIŞTIR
+    window.addEventListener('load', function() {
+        console.log('⏳ 2 saniye sonra test yapılacak...');
+        setTimeout(testEmailJS, 2000);
+    });
 </script>
 
 </body>
-                        </html>
+</html>
